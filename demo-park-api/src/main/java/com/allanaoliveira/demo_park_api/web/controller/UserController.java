@@ -65,7 +65,7 @@ public class UserController {
                             schema = @Schema(implementation = ErrorMessage.class)))
     })
     @GetMapping("/{id}")
-    public User findById(@RequestParam Long id) {
+    public User findById(@PathVariable Long id) {
 
         return userService.findById(id);
     }
