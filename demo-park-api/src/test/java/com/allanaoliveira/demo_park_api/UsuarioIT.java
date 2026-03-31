@@ -2,6 +2,7 @@ package com.allanaoliveira.demo_park_api;
 
 import com.allanaoliveira.demo_park_api.web.dto.UserCreateDto;
 import com.allanaoliveira.demo_park_api.web.dto.UserResponseDto;
+import com.allanaoliveira.demo_park_api.web.dto.mapper.UserPasswordDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,8 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import tools.jackson.databind.ObjectMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -141,6 +141,21 @@ public class UsuarioIT {
                 .andExpect(jsonPath("$.id").value(100))
                 .andExpect(jsonPath("$.username").value("allana@gmail.com"))
                 .andExpect(jsonPath("$.role").value("ROLE_ADMIN"));
+    }
+
+    @Test
+    public void deveAtualizarSenhaComSucesso() throws Exception {
+
+        UserPasswordDto dto = new UserPasswordDto(
+                "senhaAtual123",
+                "novaSenha123",
+                "novaSenha123"
+        );
+
+        mockMvc.perform(patch("/api/v1/users/{id}", 100L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isNoContent());
     }
 
 }
