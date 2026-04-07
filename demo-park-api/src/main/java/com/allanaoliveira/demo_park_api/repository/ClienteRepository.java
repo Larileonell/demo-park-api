@@ -1,11 +1,16 @@
 package com.allanaoliveira.demo_park_api.repository;
 
 import com.allanaoliveira.demo_park_api.entity.Cliente;
-import com.allanaoliveira.demo_park_api.entity.User;
+import com.allanaoliveira.demo_park_api.repository.projection.ClienteProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    Optional<Cliente> findById(Long id);
+
+    @Query("select c from Cliente c ")
+    Page<ClienteProjection> findAllPageble(Pageable pageable);
+
+    Cliente finbByUsuarioID(Long id);
 }

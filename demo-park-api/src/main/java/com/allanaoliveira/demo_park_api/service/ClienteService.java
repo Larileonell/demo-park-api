@@ -3,10 +3,13 @@ package com.allanaoliveira.demo_park_api.service;
 import com.allanaoliveira.demo_park_api.entity.Cliente;
 import com.allanaoliveira.demo_park_api.exception.cpfUniqueViolationException;
 import com.allanaoliveira.demo_park_api.repository.ClienteRepository;
+import com.allanaoliveira.demo_park_api.repository.projection.ClienteProjection;
 import com.allanaoliveira.demo_park_api.web.exception.EntintyNotFoudException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +36,12 @@ public class ClienteService {
     }
 
     @Transactional
-    public List<Cliente> findAll() {
-        return clienteRepository.findAll();
+    public Page<ClienteProjection> findAll(Pageable pageable) {
+
+        return clienteRepository.findAllPageble(pageable);
+    }
+    @Transactional
+    public Cliente buscarPorUsuario(Long id) {
+        return clienteRepository.finbByUsuarioID(id);
     }
 }
