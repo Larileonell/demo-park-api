@@ -38,7 +38,7 @@ public class ApiExceptionHandler {
 
     }
 
-    @ExceptionHandler({UsernameUniqueViolationException.class, ClassCastException.class})
+    @ExceptionHandler({UsernameUniqueViolationException.class, ClassCastException.class, CodigUniqueViolationException.class})
     public ResponseEntity<ErrorMessage> uniqueViolationException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
         return ResponseEntity
@@ -55,6 +55,7 @@ public class ApiExceptionHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
     }
+
     @ExceptionHandler(PasswordInvalidException.class)
     public ResponseEntity<ErrorMessage> PasswordInvalidException(RuntimeException ex, HttpServletRequest request) {
         log.error("Api Error - ", ex);
