@@ -12,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
 public class ClienteService {
@@ -43,5 +41,13 @@ public class ClienteService {
     @Transactional
     public Cliente buscarPorUsuario(Long id) {
         return clienteRepository.finbByUsuarioID(id);
+    }
+
+
+    @Transactional
+    public Cliente BuscarPorCpf(String cpf) {
+        return clienteRepository.findByCpf(cpf).orElseThrow(
+                () -> new EntintyNotFoudException(String.format("Cliente com cpf %s não encontrado.", cpf))
+        );
     }
 }
