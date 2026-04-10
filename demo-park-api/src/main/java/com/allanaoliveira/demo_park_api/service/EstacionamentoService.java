@@ -26,7 +26,7 @@ public class EstacionamentoService {
         clienteVaga.setCliente(cliente);
 
         Vaga vaga = vagaService.BuscarVagaLivre();
-        vaga.setStatusvaga(Vaga.Statusvaga.OCUPADA);
+        vaga.setStatusVaga(Vaga.Statusvaga.OCUPADA);
         clienteVaga.setVaga(vaga);
 
         clienteVaga.setDataEntrada(LocalDateTime.now());

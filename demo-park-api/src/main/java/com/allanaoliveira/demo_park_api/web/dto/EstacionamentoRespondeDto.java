@@ -1,5 +1,7 @@
 package com.allanaoliveira.demo_park_api.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EstacionamentoRespondeDto {
 
     private String placa;
@@ -20,6 +23,7 @@ public class EstacionamentoRespondeDto {
     private String cor;
     private String clienteCpf;
     private String recibo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dataEntrada;
     private LocalDateTime dataSaida;
     private String vagaCodigo;

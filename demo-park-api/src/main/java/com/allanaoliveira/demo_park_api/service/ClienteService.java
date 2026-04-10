@@ -40,7 +40,7 @@ public class ClienteService {
     }
     @Transactional
     public Cliente buscarPorUsuario(Long id) {
-        return clienteRepository.finbByUsuarioID(id);
+        return clienteRepository.findByUserId(id).orElseThrow();
     }
 
 

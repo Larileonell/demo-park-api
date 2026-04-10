@@ -29,9 +29,10 @@ public class Vaga implements Serializable {
     private String codigo;
 
 
-    @Column(name = "status", nullable = false, length = 100)
+
     @Enumerated(EnumType.STRING)
-    private Statusvaga statusvaga;
+    @Column(name = "status_vaga")
+    private Statusvaga statusVaga;
 
     public enum Statusvaga {
         LIVRE, OCUPADA
